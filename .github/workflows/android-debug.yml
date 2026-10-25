@@ -19,14 +19,14 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - uses: android-actions/setup-android@v3
+      # এখানে v3 এর জায়গায় v4 ব্যবহার করা হয়েছে
+      - uses: android-actions/setup-android@v4
+        with:
+          packages: '' # <--- এটি 'tools' প্যাকেজের সমস্যা সমাধান করবে
 
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.13'
-
-      - name: Install SDK
-        run: sdkmanager 'platforms;android-36' 'build-tools;35.0.0'
 
       - name: Tests and APK
         run: gradle --no-daemon testDebugUnitTest assembleDebug
