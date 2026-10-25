@@ -50,7 +50,7 @@ public final class UrlRules {
         }
 
         Matcher matcher = Pattern.compile(
-                "https://[^\\s<>\\"]+",
+                "https://[^\\s<>\\\"]+",
                 Pattern.CASE_INSENSITIVE
         ).matcher(text);
 
@@ -68,7 +68,7 @@ public final class UrlRules {
         String name = raw == null ? "" : raw;
 
         name = name
-                .replaceAll("[\\p{Cntrl}\\p{Cf}/\\\\:*?"<>|]", "_")
+                .replaceAll("[\\p{Cntrl}\\p{Cf}/\\\\:*?\"<>|]", "_")
                 .trim()
                 .replaceAll("^\\.+", "");
 
@@ -137,7 +137,7 @@ public final class UrlRules {
             }
 
             Matcher simple = Pattern.compile(
-                    "filename\\s*=\\s*(?:"([^"]*)"|([^;]+))",
+                    "filename\\s*=\\s*(?:\"([^\"]*)\"|([^;]+))",
                     Pattern.CASE_INSENSITIVE
             ).matcher(header);
 
