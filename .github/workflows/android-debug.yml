@@ -1,6 +1,8 @@
 name: Android debug build and unit tests
 
 on:
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
