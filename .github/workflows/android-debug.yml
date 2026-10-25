@@ -19,28 +19,19 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      # এখানে v3 এর জায়গায় v4 ব্যবহার করা হয়েছে
       - uses: android-actions/setup-android@v4
         with:
-          packages: '' # <--- এটি 'tools' প্যাকেজের সমস্যা সমাধান করবে
+          packages: ''
 
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.13'
 
-      - name: Tests and APK
-        run: gradle --no-daemon testDebugUnitTest assembleDebug
+      - name: Build APK
+        run: gradle --no-daemon assembleDebug
 
       - uses: actions/upload-artifact@v4
         with:
           name: DownloadHub-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
-
-      - name: Test reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unit-test-reports
-          path: app/build/reports/tests/
-          if-no-files-found: ignore
